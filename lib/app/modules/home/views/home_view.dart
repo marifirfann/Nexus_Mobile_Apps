@@ -41,14 +41,14 @@ class HomeView extends StatelessWidget {
             ),
 
             const SizedBox(height: 20),
-            // Sekolah Favorit
+            // Mentor Favorit
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Sekolah Favorit',
+                    'Mentor Favorit',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -56,18 +56,18 @@ class HomeView extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   ListTile(
-                    leading: const Icon(Icons.school, color: Colors.blue),
-                    title: const Text('SMAN 1 Jakarta'),
-                    subtitle: const Text('Kelas 10'),
+                    leading: const Icon(Icons.person, color: Colors.blue),
+                    title: const Text('Budi Santoso'),
+                    subtitle: const Text('Pengalaman di dunia pendidikan'),
                     trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {
                       // Fungsi
                     },
                   ),
                   ListTile(
-                    leading: const Icon(Icons.school, color: Colors.blue),
-                    title: const Text('SMPN 2 Jakarta'),
-                    subtitle: const Text('Kelas 9'),
+                    leading: const Icon(Icons.person, color: Colors.blue),
+                    title: const Text('Rina Wijaya'),
+                    subtitle: const Text('Ekspert di bidang teknologi'),
                     trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {
                       // Fungsi
@@ -77,14 +77,14 @@ class HomeView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            // Rekomendasi Kursus
+            // Rekomendasi Program Mentorship
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Rekomendasi Kursus',
+                    'Rekomendasi Program Mentorship',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -92,19 +92,18 @@ class HomeView extends StatelessWidget {
                   ),
                   const SizedBox(height: 10),
                   ListTile(
-                    leading: const Icon(Icons.book, color: Colors.blue),
-                    title: const Text('Kursus Matematika Dasar'),
-                    subtitle: const Text('Belajar dari nol!'),
+                    leading: const Icon(Icons.school, color: Colors.blue),
+                    title: const Text('Mentorship di Pengembangan Karier'),
+                    subtitle: const Text('Tingkatkan skill dan cari peluang baru'),
                     trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {
                       // Fungsi
                     },
                   ),
                   ListTile(
-                    leading: const Icon(Icons.book, color: Colors.blue),
-                    title: const Text('Kursus Fisika Menarik'),
-                    subtitle: const Text(
-                        'Keterapan fisika dalam kehidupan sehari-hari'),
+                    leading: const Icon(Icons.school, color: Colors.blue),
+                    title: const Text('Mentorship di Teknologi Digital'),
+                    subtitle: const Text('Pelajari teknologi terbaru dan aplikasinya'),
                     trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {
                       // Fungsi
@@ -114,7 +113,7 @@ class HomeView extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 30),
-            // Tombol Mulai Belajar
+            // Tombol Mulai Mentorship
             Center(
               child: ElevatedButton(
                 onPressed: () {
@@ -129,7 +128,7 @@ class HomeView extends StatelessWidget {
                   ),
                 ),
                 child: const Text(
-                  'Mulai Belajar',
+                  'Mulai Mentorship',
                   style: TextStyle(
                     color: Colors.white,
                   ),

@@ -63,42 +63,41 @@ class _EditProfileViewState extends State<EditProfileView> {
 
   // Fungsi untuk menyimpan perubahan ke Firestore atau lokal
   // Fungsi untuk menyimpan perubahan ke Firestore atau lokal
-void saveChanges() async {
-  User? user = FirebaseAuth.instance.currentUser;
-  if (user == null) return;
+  void saveChanges() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user == null) return;
 
-  Map<String, dynamic> dataToSave = {
-    'name': usernameController.text,
-    'email': emailController.text,
-    'school': schoolController.text,
-    'uid': user.uid,
-  };
+    Map<String, dynamic> dataToSave = {
+      'name': usernameController.text,
+      'email': emailController.text,
+      'school': schoolController.text,
+      'uid': user.uid,
+    };
 
-  if (await hasInternetConnection()) {
-    // Jika ada koneksi, langsung upload
-    await uploadToFirestore(dataToSave);
-  } else {
-    // Jika tidak ada koneksi, simpan ke penyimpanan lokal
-    box.write('pending_upload', dataToSave);
-    Get.snackbar(
-      'Offline',
-      'Perubahan tersimpan di penyimpanan lokal. Akan diunggah saat online.',
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.orangeAccent,
-      colorText: Colors.white,
-    );
+    if (await hasInternetConnection()) {
+      // Jika ada koneksi, langsung upload
+      await uploadToFirestore(dataToSave);
+    } else {
+      // Jika tidak ada koneksi, simpan ke penyimpanan lokal
+      box.write('pending_upload', dataToSave);
+      Get.snackbar(
+        'Offline',
+        'Perubahan tersimpan di penyimpanan lokal. Akan diunggah saat online.',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.orangeAccent,
+        colorText: Colors.white,
+      );
 
-    // Tetap tampilkan notifikasi "Tersimpan" untuk memberikan kepastian
-    Get.snackbar(
-      'Tersimpan',
-      'Perubahan berhasil disimpan secara lokal.',
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.green,
-      colorText: Colors.white,
-    );
+      // Tetap tampilkan notifikasi "Tersimpan" untuk memberikan kepastian
+      Get.snackbar(
+        'Tersimpan',
+        'Perubahan berhasil disimpan secara lokal.',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green,
+        colorText: Colors.white,
+      );
+    }
   }
-}
-
 
   // Fungsi untuk upload data ke Firestore
   Future<void> uploadToFirestore(Map<String, dynamic> data) async {
@@ -117,9 +116,19 @@ void saveChanges() async {
       });
 
       Get.snackbar(
-        'Sukses',
-        'Perubahan berhasil disimpan di database',
+        'Sukses!',
+        'Perubahan berhasil disimpan',
         snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.green, 
+        colorText: Colors.white, 
+        icon: Icon(
+          Icons.check_circle, 
+          color: Colors.white, 
+        ),
+        duration: Duration(seconds: 3), 
+        margin: EdgeInsets.all(10),
+        borderRadius: 10, // Sudut yang membulat
+        snackStyle: SnackStyle.FLOATING, 
       );
 
       // Hapus data dari penyimpanan lokal jika berhasil upload
@@ -219,11 +228,10 @@ void saveChanges() async {
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
-                  child:
-                       const Text(
-                          'Simpan Perubahan',
-                          style: TextStyle(color: Colors.white),
-                        ),
+                  child: const Text(
+                    'Simpan Perubahan',
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
               const SizedBox(height: 30),

@@ -19,28 +19,28 @@ class ProfileView extends StatefulWidget {
 class ProfileViewState extends State<ProfileView> {
   final ProfileController controller = Get.put(ProfileController());
   File? profileImage; // Icon profile
-  String userName = '';
-  String userSchool = '';
-  String userBalance = '1000'; // Tambahkan variable untuk saldo
+  String mentorName = '';
+  String mentorSchool = '';
+  String mentorBalance = '10000'; // Tambahkan variable untuk saldo
 
   @override
   void initState() {
     super.initState();
-    fetchUserData();
+    fetchMentorData();
   }
 
-  void fetchUserData() async {
+  void fetchMentorData() async {
     User? user = FirebaseAuth.instance.currentUser; // Get current user
     if (user != null) {
       DocumentSnapshot doc = await FirebaseFirestore.instance
-          .collection('users') // Ganti dengan nama koleksi Anda
+          .collection('users') // Ganti dengan nama koleksi untuk mentor
           .doc(user.uid)
           .get();
       if (doc.exists) {
         setState(() {
-          userName = doc['name']; // Sesuaikan dengan field di Firestore
-          userSchool = doc['school'];
-          // userBalance = doc['balance'].toString(); // Ambil saldo pengguna
+          mentorName = doc['name']; // Sesuaikan dengan field di Firestore
+          mentorSchool = doc['school'];
+          // mentorBalance = doc['balance'].toString(); // Ambil saldo mentor
         });
       }
     }
@@ -93,7 +93,7 @@ class ProfileViewState extends State<ProfileView> {
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    userName.isNotEmpty ? userName : 'Loading...',
+                    mentorName.isNotEmpty ? mentorName : 'Loading...',
                     style: const TextStyle(
                       color: Colors.white,
                       fontSize: 24,
@@ -102,17 +102,17 @@ class ProfileViewState extends State<ProfileView> {
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    userSchool.isNotEmpty ? userSchool : 'Loading...',
+                    mentorSchool.isNotEmpty ? mentorSchool : 'Loading...',
                     style: const TextStyle(
                       color: Colors.white70,
                       fontSize: 16,
                     ),
                   ),
                   const SizedBox(height: 10),
-                  // Menambahkan saldo pengguna
+                  // Menambahkan saldo mentor
                   Text(
-                    userBalance.isNotEmpty
-                        ? 'Saldo Anda: Rp $userBalance' // Menampilkan saldo
+                    mentorBalance.isNotEmpty
+                        ? 'Saldo Anda: Rp $mentorBalance' // Menampilkan saldo
                         : 'Saldo: Loading...',
                     style: const TextStyle(
                       color: Colors.white,
@@ -147,14 +147,14 @@ class ProfileViewState extends State<ProfileView> {
               ),
             ),
             const SizedBox(height: 20),
-            // Kursus yang Diikuti
+            // Mentor yang Anda Bimbing
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Text(
-                    'Kursus yang Diikuti',
+                    'Mentor yang Anda Bimbing',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -162,44 +162,44 @@ class ProfileViewState extends State<ProfileView> {
                   ),
                   const SizedBox(height: 10),
                   ListTile(
-                    leading: const Icon(Icons.book, color: Colors.blue),
-                    title: const Text('Matematika Dasar - Kelas 10'),
+                    leading: const Icon(Icons.school, color: Colors.blue),
+                    title: const Text('Bimbingan Matematika - Kelas 10'),
                     subtitle: const Text('Progress: 70%'),
                     trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {
-                      // Fungsi menuju detail kursus
+                      // Fungsi menuju detail mentoring
                     },
                   ),
                   ListTile(
-                    leading: const Icon(Icons.book, color: Colors.blue),
-                    title: const Text('Fisika - Kelas 10'),
+                    leading: const Icon(Icons.school, color: Colors.blue),
+                    title: const Text('Bimbingan Fisika - Kelas 10'),
                     subtitle: const Text('Progress: 50%'),
                     trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {
-                      // Fungsi menuju detail kursus
+                      // Fungsi menuju detail mentoring
                     },
                   ),
                   ListTile(
-                    leading: const Icon(Icons.book, color: Colors.blue),
-                    title: const Text('Kimia - Kelas 10'),
+                    leading: const Icon(Icons.school, color: Colors.blue),
+                    title: const Text('Bimbingan Kimia - Kelas 10'),
                     subtitle: const Text('Progress: 30%'),
                     trailing: const Icon(Icons.arrow_forward_ios),
                     onTap: () {
-                      // Fungsi menuju detail kursus
+                      // Fungsi menuju detail mentoring
                     },
                   ),
                 ],
               ),
             ),
             const SizedBox(height: 20),
-            // Prestasi
+            // Prestasi Mentor
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Prestasi',
+                    'Prestasi Anda',
                     style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
@@ -208,12 +208,12 @@ class ProfileViewState extends State<ProfileView> {
                   SizedBox(height: 10),
                   ListTile(
                     leading: Icon(Icons.emoji_events, color: Colors.amber),
-                    title: Text('Juara 1 Olimpiade Matematika'),
+                    title: Text('Mentor Terbaik dalam Olimpiade Matematika'),
                     subtitle: Text('Tahun 2023'),
                   ),
                   ListTile(
                     leading: Icon(Icons.emoji_events, color: Colors.amber),
-                    title: Text('Finalis Lomba Sains Nasional'),
+                    title: Text('Mentor Finalis Lomba Sains Nasional'),
                     subtitle: Text('Tahun 2022'),
                   ),
                 ],
